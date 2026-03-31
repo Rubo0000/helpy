@@ -103,15 +103,14 @@ function MedicationCard() {
           return (
             <div
               key={medicine.id}
-              className={`rounded-xl p-4 border-2 transition-all ${
-                medicine.taken
+              className={`rounded-xl p-4 border-2 transition-all ${medicine.taken
                   ? 'bg-emerald-50 border-emerald-200'
                   : timeStatus === 'overdue'
-                  ? 'bg-rose-50 border-rose-200'
-                  : timeStatus === 'upcoming'
-                  ? 'bg-amber-50 border-amber-200'
-                  : 'bg-slate-50 border-slate-200'
-              }`}
+                    ? 'bg-rose-50 border-rose-200'
+                    : timeStatus === 'upcoming'
+                      ? 'bg-amber-50 border-amber-200'
+                      : 'bg-slate-50 border-slate-200'
+                }`}
             >
               <div className="flex flex-col gap-3">
                 <div className="flex items-start justify-between gap-3">
@@ -141,13 +140,12 @@ function MedicationCard() {
                       type="button"
                       onClick={() => handleTaken(medicine)}
                       aria-label={`Marcar ${medicine.name} como tomada`}
-                      className={`shrink-0 px-4 py-2 text-white rounded-lg font-bold transition-all ${
-                        timeStatus === 'overdue'
+                      className={`shrink-0 px-4 py-2 text-white rounded-lg font-bold transition-all ${timeStatus === 'overdue'
                           ? 'bg-rose-500 hover:bg-rose-400'
                           : timeStatus === 'upcoming'
-                          ? 'bg-amber-500 hover:bg-amber-400'
-                          : 'bg-blue-500 hover:bg-blue-400'
-                      }`}
+                            ? 'bg-amber-500 hover:bg-amber-400'
+                            : 'bg-blue-500 hover:bg-blue-400'
+                        }`}
                     >
                       Tomar
                     </button>
