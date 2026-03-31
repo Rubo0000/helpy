@@ -32,7 +32,6 @@ function ElderlyView() {
         <EmergencyContacts />
       </section>
 
-      <EmergencyButton />
     </div>
   )
 }

@@ -16,7 +16,7 @@ function AppointmentsCard() {
         <div className="p-3 bg-slate-100 text-slate-600 rounded-2xl">
           <CalendarClock className="h-8 w-8" />
         </div>
-        <h2 className="text-2xl font-bold text-slate-800">Tus citas médicas</h2>
+        <h2 className="text-2xl font-bold text-slate-800">Próximas citas</h2>
       </div>
 
       <div className="space-y-3">
