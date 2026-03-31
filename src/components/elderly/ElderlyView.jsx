@@ -21,20 +21,15 @@ function ElderlyView() {
         />
       )}
 
-      <ElderlyHeader onCaregiverAccess={() => setShowPinModal(true)} />
+        <ElderlyHeader onCaregiverAccess={() => setShowPinModal(true)} />
 
-      <section className="space-y-6 flex-1 stagger-group">
-        <div className="mb-4 stagger-item" style={{ '--delay': '60ms' }}>
-          <h1 className="text-[2.75rem] leading-tight font-extrabold text-slate-800 tracking-tight">
-            Hola, Papá <span className="inline-block wave-emoji origin-bottom-right">👋</span>
-          </h1>
-          <p className="text-xl text-slate-500 font-medium mt-1">¿Cómo te encuentras hoy?</p>
-        </div>
+      <section className="space-y-6 flex-1">
 
-        <div className="stagger-item" style={{ '--delay': '120ms' }}><HealthStatusCard /></div>
-        <div className="stagger-item" style={{ '--delay': '180ms' }}><MedicationCard /></div>
-        <div className="stagger-item" style={{ '--delay': '240ms' }}><AppointmentsCard /></div>
-        <div className="stagger-item" style={{ '--delay': '300ms' }}><EmergencyContacts /></div>
+
+        <AppointmentsCard />
+          <MedicationCard />
+        <HealthStatusCard />
+        <EmergencyContacts />
       </section>
 
       <EmergencyButton />

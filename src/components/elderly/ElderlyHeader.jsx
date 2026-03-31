@@ -1,9 +1,9 @@
-import { Settings, ShieldCheck } from 'lucide-react'
-import LogoHelpy from '../../assets/LogoHelpy.png'
+import { Settings } from 'lucide-react'
+// import LogoHelpy from '../../assets/LogoHelpy.png'
 
 function ElderlyHeader({ onCaregiverAccess }) {
   return (
-    <header className="relative flex flex-col items-center pb-8">
+    <header className="relative flex flex-col">
       <button
         type="button"
         onClick={onCaregiverAccess}
@@ -13,7 +13,14 @@ function ElderlyHeader({ onCaregiverAccess }) {
         <Settings className="h-6 w-6" />
       </button>
 
-      <div className="relative">
+        <div className="mb-4">
+            <h1 className="text-[2.75rem] leading-tight font-extrabold text-slate-800 tracking-tight">
+                Hola, Papá <span className="inline-block wave-emoji origin-bottom-right">👋</span>
+            </h1>
+            {/*<p className="text-xl text-slate-500 font-medium mt-1">¿Cómo te encuentras hoy?</p>*/}
+        </div>
+
+        {/*<div className="relative">
         <img
           src={LogoHelpy}
           alt="Helpy"
@@ -25,7 +32,7 @@ function ElderlyHeader({ onCaregiverAccess }) {
       </div>
       <p className="mt-3 text-lg font-bold text-slate-400 tracking-wide uppercase text-[0.8rem]">
         Helpy, Siempre Contigo
-      </p>
+      </p>*/}
     </header>
   )
 }
