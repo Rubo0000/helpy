@@ -11,7 +11,7 @@ function EmergencyButton() {
       setTimeout(cancelCall, 5000)
       return
     }
-    window.alert(`Llamando a ${emergencyContacts[0].name}...`)
+    window.location.href = `tel:${emergencyContacts[0].phone.replace(/\s/g, '')}`
     cancelCall()
   }
 
@@ -21,6 +21,7 @@ function EmergencyButton() {
         <button
           type="button"
           onClick={handleCall}
+          aria-label={callConfirmation ? 'Confirmar llamada de emergencia' : `Llamar a ${emergencyContacts[0].name}`}
           className="mx-auto flex w-full items-center justify-center gap-4 rounded-[2rem] bg-rose-500 px-6 py-6 text-[1.35rem] font-black text-white shadow-[0_8px_0_rgb(190,18,60)] transition-all hover:bg-rose-400 hover:translate-y-1 hover:shadow-[0_4px_0_rgb(190,18,60)] active:shadow-none active:translate-y-2"
         >
           <Phone className="h-8 w-8 fill-current" />

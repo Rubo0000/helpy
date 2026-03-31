@@ -5,8 +5,8 @@ import { useConfirmation } from '../../hooks/useConfirmation'
 function EmergencyContacts() {
   const { pending: pendingCallName, request: requestCall, cancel: cancelCall } = useConfirmation()
 
-  const confirmCall = (name) => {
-    window.alert(`Llamando a ${name}...`)
+  const confirmCall = (contact) => {
+    window.location.href = `tel:${contact.phone.replace(/\s/g, '')}`
     cancelCall()
   }
 
@@ -28,7 +28,7 @@ function EmergencyContacts() {
               <div className="mt-3 space-y-2">
                 <button
                   type="button"
-                  onClick={() => confirmCall(contact.name)}
+                  onClick={() => confirmCall(contact)}
                   className="w-full py-2 bg-rose-500 text-white rounded-lg font-bold hover:bg-rose-400 transition-all text-sm"
                 >
                   Pulsa otra vez para llamar
@@ -45,6 +45,7 @@ function EmergencyContacts() {
               <button
                 type="button"
                 onClick={() => requestCall(contact.name)}
+                aria-label={`Llamar a ${contact.name}`}
                 className="mt-3 w-full py-2 bg-orange-500 text-white rounded-lg font-bold hover:bg-orange-400 transition-all text-sm"
               >
                 Llamar

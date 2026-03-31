@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useApp } from '../../context/AppContext'
 import ElderlyHeader from './ElderlyHeader'
 import HealthStatusCard from './HealthStatusCard'
@@ -5,24 +6,22 @@ import MedicationCard from './MedicationCard'
 import AppointmentsCard from './AppointmentsCard'
 import EmergencyContacts from './EmergencyContacts'
 import EmergencyButton from './EmergencyButton'
+import PinModal from '../common/PinModal'
 
 function ElderlyView() {
   const { setIsCaregiverMode } = useApp()
-
-  const handleCaregiverAccess = () => {
-    const pin = window.prompt('Introduce el PIN del cuidador (ej. 1234)')
-    if (pin === '1234') {
-      setIsCaregiverMode(true)
-      return
-    }
-    if (pin !== null && pin.trim() !== '') {
-      window.alert('PIN incorrecto')
-    }
-  }
+  const [showPinModal, setShowPinModal] = useState(false)
 
   return (
     <div className="relative min-h-full px-5 pt-8 pb-40 flex flex-col fade-in">
-      <ElderlyHeader onCaregiverAccess={handleCaregiverAccess} />
+      {showPinModal && (
+        <PinModal
+          onSuccess={() => { setShowPinModal(false); setIsCaregiverMode(true) }}
+          onClose={() => setShowPinModal(false)}
+        />
+      )}
+
+      <ElderlyHeader onCaregiverAccess={() => setShowPinModal(true)} />
 
       <section className="space-y-6 flex-1">
         <div className="mb-4">

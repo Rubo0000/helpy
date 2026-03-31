@@ -4,7 +4,7 @@ import { useConfirmation } from '../../hooks/useConfirmation'
 import ConfirmDialog from '../common/ConfirmDialog'
 
 function MedicationModule() {
-  const { medicines } = useApp()
+  const { medicines, addToast, addLogEntry } = useApp()
   const { pending: callConfirm, request: requestCall, cancel: cancelCall } = useConfirmation()
 
   const pendingMedicines = medicines.filter((m) => !m.taken)
@@ -12,7 +12,8 @@ function MedicationModule() {
   const nextPending = pendingMedicines[0]
 
   const confirmCall = () => {
-    window.alert('Llamando para recordar la toma pendiente...')
+    addToast(`Recordatorio enviado a Papá: ${nextPending?.name} (${nextPending?.time})`, 'warn')
+    addLogEntry(`Recordatorio enviado para toma de ${nextPending?.name} (${nextPending?.time})`, 'warn')
     cancelCall()
   }
 
