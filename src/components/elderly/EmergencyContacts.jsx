@@ -1,6 +1,7 @@
 import { Phone } from 'lucide-react'
 import { emergencyContacts } from '../../data/mockData'
 import { useConfirmation } from '../../hooks/useConfirmation'
+import EmergencyButton from "./EmergencyButton.jsx";
 
 function EmergencyContacts() {
   const { pending: pendingCallName, request: requestCall, cancel: cancelCall } = useConfirmation()
@@ -11,7 +12,7 @@ function EmergencyContacts() {
   }
 
   return (
-    <article className="rounded-[2rem] bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-orange-100 p-6 shadow-sm">
+    <article className="rounded-[2rem] bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-orange-100 p-6 shadow-sm mb-4">
       <div className="flex items-center gap-4 mb-4">
         <div className="p-3 bg-orange-200 text-orange-600 rounded-2xl">
           <Phone className="h-8 w-8" />
@@ -19,7 +20,7 @@ function EmergencyContacts() {
         <h2 className="text-2xl font-bold text-slate-800">Contactos</h2>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-3 ">
         {emergencyContacts.map((contact) => (
           <div key={contact.name} className="bg-white rounded-xl p-4 border border-orange-100">
             <p className="font-bold text-slate-800">{contact.name}</p>
@@ -53,6 +54,9 @@ function EmergencyContacts() {
             )}
           </div>
         ))}
+
+          <EmergencyButton />
+
       </div>
     </article>
   )

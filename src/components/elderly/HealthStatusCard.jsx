@@ -36,7 +36,7 @@ function HealthStatusCard() {
         </div>
         <h2 className="text-2xl font-bold text-slate-800">Tu salud hoy</h2>
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      {/*<div className="grid grid-cols-2 gap-4">
         <div className="bg-white rounded-xl p-4 border border-slate-100">
           <p className="text-sm text-slate-600 font-semibold">Ánimo</p>
           <p className={`text-2xl font-bold mt-2 capitalize ${status.moodStyle}`}>{status.mood}</p>
@@ -79,7 +79,7 @@ function HealthStatusCard() {
             </button>
           </div>
         </div>
-      </div>
+      </div>*/}
 
       <div className="mt-4 rounded-xl border border-slate-200 bg-white p-4">
         <p className="text-xs font-bold uppercase tracking-wide text-slate-500 flex items-center gap-1">
