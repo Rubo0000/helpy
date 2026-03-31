@@ -1,14 +1,21 @@
 export const initialMedicines = [
-  { id: 1, name: 'Atorvastatina', time: '08:00', taken: true },
+  { id: 1, name: 'Atorvastatina', time: '08:00', taken: false },
   { id: 2, name: 'Losartan', time: '14:00', taken: false },
   { id: 3, name: 'Omeprazol', time: '20:00', taken: false },
 ]
 
+// daysFromNow: days until the appointment from today (0 = today, 1 = tomorrow, etc.)
 export const appointmentsList = [
-  { id: 1, doctor: 'Médico de cabecera', date: 'Mañana', time: '10:00', location: 'Centro de salud', priority: 'high' },
-  { id: 2, doctor: 'Oftalmólogo', date: 'En 5 días', time: '15:30', location: 'Clínica privada', priority: 'normal' },
-  { id: 3, doctor: 'Cardiólogo', date: 'En 15 días', time: '11:00', location: 'Hospital central', priority: 'normal' },
+  { id: 1, doctor: 'Médico de cabecera', daysFromNow: 1, time: '10:00', location: 'Centro de salud', priority: 'high' },
+  { id: 2, doctor: 'Oftalmólogo', daysFromNow: 5, time: '15:30', location: 'Clínica privada', priority: 'normal' },
+  { id: 3, doctor: 'Cardiólogo', daysFromNow: 15, time: '11:00', location: 'Hospital central', priority: 'normal' },
 ]
+
+export function formatDaysLabel(daysFromNow) {
+  if (daysFromNow === 0) return 'Hoy'
+  if (daysFromNow === 1) return 'Mañana'
+  return `En ${daysFromNow} días`
+}
 
 export const emergencyContacts = [
   { name: 'Carlos (hijo)', phone: '+34 623 456 789', relation: 'hijo' },
@@ -24,7 +31,6 @@ export const caregiverAppointments = [
 
 export const dailyStatus = {
   sleepHours: 7.5,
-  hydrationGlasses: 6,
   bloodPressure: '132/82',
   pulse: 72,
 }

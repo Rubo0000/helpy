@@ -23,10 +23,18 @@ function MedicationCard() {
   const { medicines, setMedicines, addLogEntry } = useApp()
   const { pending: pendingUnmarkId, request: requestUnmark, cancel: cancelUnmark } = useConfirmation()
   const taken = medicines.filter((m) => m.taken).length
+  const nowMinutes = new Date().getHours() * 60 + new Date().getMinutes()
+  const sortedMedicines = [...medicines].sort((a, b) => a.time.localeCompare(b.time))
+  const dayStart = sortedMedicines.length ? Number(sortedMedicines[0].time.slice(0, 2)) * 60 + Number(sortedMedicines[0].time.slice(3, 5)) : 0
+  const dayEnd = sortedMedicines.length ? Number(sortedMedicines[sortedMedicines.length - 1].time.slice(0, 2)) * 60 + Number(sortedMedicines[sortedMedicines.length - 1].time.slice(3, 5)) : 1
+  const markerPercent = sortedMedicines.length > 1
+    ? Math.min(100, Math.max(0, ((nowMinutes - dayStart) / Math.max(dayEnd - dayStart, 1)) * 100))
+    : 0
 
   const handleTaken = (medicine) => {
     setMedicines((prev) => prev.map((m) => m.id === medicine.id ? { ...m, taken: true } : m))
     addLogEntry(`Pastilla ${medicine.name} confirmada`, 'ok')
+    if (navigator.vibrate) navigator.vibrate(50)
   }
 
   const confirmUnmark = (medicine) => {
@@ -60,6 +68,34 @@ function MedicationCard() {
           />
         ))}
       </div>
+
+      {sortedMedicines.length > 1 && (
+        <div className="mb-6 rounded-xl border border-blue-100 bg-blue-50/60 p-4">
+          <p className="text-xs font-bold uppercase tracking-wide text-blue-700">Horario del dia</p>
+          <div className="relative mt-6">
+            <div className="h-1.5 rounded-full bg-blue-100" />
+            <div
+              className="absolute -top-1.5 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-white bg-blue-500 shadow"
+              style={{ left: `${markerPercent}%` }}
+              aria-label="Hora actual"
+            />
+            <div className="absolute -top-6 left-0 text-[11px] font-bold text-blue-700">
+              {sortedMedicines[0].time}
+            </div>
+            <div className="absolute -top-6 right-0 text-[11px] font-bold text-blue-700">
+              {sortedMedicines[sortedMedicines.length - 1].time}
+            </div>
+            <div className="mt-4 flex items-center justify-between gap-3">
+              {sortedMedicines.map((medicine) => (
+                <div key={medicine.id} className="text-center">
+                  <span className={`inline-block h-2.5 w-2.5 rounded-full ${medicine.taken ? 'bg-emerald-500' : 'bg-blue-300'}`} />
+                  <p className="mt-1 text-[10px] font-semibold text-slate-600">{medicine.time}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="space-y-3">
         {medicines.map((medicine) => {

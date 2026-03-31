@@ -1,7 +1,10 @@
 import { HeartPulse, Droplets } from 'lucide-react'
 import { dailyStatus } from '../../data/mockData'
+import { useApp } from '../../context/AppContext'
 
 function DailyMonitoring() {
+  const { hydration, symptoms } = useApp()
+
   return (
     <section className="rounded-3xl bg-white p-5 shadow-sm border border-slate-200 space-y-3">
       <div className="flex items-center gap-2">
@@ -24,9 +27,15 @@ function DailyMonitoring() {
         <article className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
           <p className="text-xs font-bold text-slate-500 uppercase">Hidratación</p>
           <p className="text-lg font-black text-slate-800 mt-1 flex items-center gap-1">
-            <Droplets className="h-4 w-4 text-cyan-500" /> {dailyStatus.hydrationGlasses} vasos
+            <Droplets className="h-4 w-4 text-cyan-500" /> {hydration} vasos
           </p>
         </article>
+      </div>
+      <div className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
+        <p className="text-xs font-bold text-slate-500 uppercase">Sintomas hoy</p>
+        <p className="text-sm font-bold text-slate-700 mt-1">
+          {symptoms.length ? symptoms.join(', ') : 'Sin sintomas marcados'}
+        </p>
       </div>
     </section>
   )

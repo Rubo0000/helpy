@@ -1,7 +1,15 @@
 import { CalendarClock, MapPin } from 'lucide-react'
-import { appointmentsList } from '../../data/mockData'
+import { appointmentsList, formatDaysLabel } from '../../data/mockData'
+
+function formatAppointmentDate(daysFromNow) {
+  const date = new Date()
+  date.setDate(date.getDate() + daysFromNow)
+  return date.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' })
+}
 
 function AppointmentsCard() {
+  const sortedAppointments = [...appointmentsList].sort((a, b) => a.daysFromNow - b.daysFromNow)
+
   return (
     <article className="rounded-[2rem] bg-white border-2 border-slate-100 p-6 shadow-sm">
       <div className="flex items-center gap-4 mb-4">
@@ -12,7 +20,7 @@ function AppointmentsCard() {
       </div>
 
       <div className="space-y-3">
-        {appointmentsList.map((appointment, index) => (
+        {sortedAppointments.map((appointment, index) => (
           <div
             key={appointment.id}
             className={`rounded-xl p-4 border-2 ${index === 0 ? 'bg-blue-50 border-blue-200' : 'bg-slate-50 border-slate-200'}`}
@@ -25,7 +33,10 @@ function AppointmentsCard() {
                     <span className="text-xs font-bold bg-red-100 text-red-700 px-2 py-1 rounded">PRÓXIMA</span>
                   )}
                 </div>
-                <p className="text-sm text-slate-600 mt-2">{appointment.date}, {appointment.time}</p>
+                <p className="text-sm text-slate-600 mt-2">
+                  {formatAppointmentDate(appointment.daysFromNow)}, {appointment.time}
+                </p>
+                <p className="text-xs font-bold text-blue-700 mt-1">{formatDaysLabel(appointment.daysFromNow)}</p>
                 <div className="flex items-center gap-1 mt-2 text-slate-600">
                   <MapPin className="h-4 w-4" />
                   <span className="text-sm">{appointment.location}</span>
